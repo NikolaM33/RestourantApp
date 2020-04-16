@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_flag"
+        android:layout_width="80dp"
+        android:layout_height="66dp"
+        android:src="@drawable/flag_serbia" />
+
+    <TextView
+        android:id="@+id/phone_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image_flag"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toEndOf="@id/image_flag"
+        android:gravity="center"
+        android:text="+386"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+</RelativeLayout>
