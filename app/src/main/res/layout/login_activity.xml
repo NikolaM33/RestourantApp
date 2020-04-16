@@ -4,86 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="170dp"
-    android:id="@+id/header"
-    android:orientation="vertical"
-    android:background="@drawable/header">
+    tools:context="LoginActivity">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_height="170dp"
+        android:background="@drawable/header"
+        android:orientation="vertical">
 
-        android:fontFamily="cursive"
-        android:text="Login"
-        android:textColor="@android:color/white"
-        android:textSize="45dp"
-        android:textStyle="bold" />
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+
+            android:fontFamily="cursive"
+            android:text="Login"
+            android:textColor="@android:color/white"
+            android:textSize="45dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_below="@+id/header"
-        android:padding="15dp"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
-        >
+        android:orientation="vertical"
+        android:padding="15dp">
+
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
             app:counterEnabled="true"
-            android:id="@+id/username"
-            >
+            app:errorEnabled="true">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
-                android:inputType="text"
-                />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         >
+
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:passwordToggleEnabled="true"
 
-            android:id="@+id/password"
-            >
+            app:passwordToggleEnabled="true">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:inputType="textPassword"
-                />
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="30dp"
             android:background="@color/color2"
-            android:layout_marginTop="30dp"/>
-
-
-
+            android:text="Login"
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>
@@ -96,7 +88,6 @@
         android:layout_marginTop="145dp"
         android:layout_marginBottom="41dp"
         android:background="@drawable/ic_action_user" />
-
 
 
 </RelativeLayout>
