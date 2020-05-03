@@ -35,7 +35,6 @@
         android:padding="15dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:counterEnabled="true"
@@ -43,17 +42,20 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username1"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
-                android:inputType="text" />
+                android:inputType="text"
+                />
+
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        >
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
@@ -62,20 +64,42 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/forgotpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget password password ?" />
+        <Button
+            android:id="@+id/login1"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:background="@color/color2"
+            android:text="Login"
+            android:textColor="@android:color/white" />
+
+
 
         <Button
+            android:id="@+id/singup1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@color/color2"
-            android:text="Login"
+            android:text="SignUp"
             android:textColor="@android:color/white" />
+
+
+
 
 
     </LinearLayout>
