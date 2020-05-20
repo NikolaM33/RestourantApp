@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.restourantapp.Databases.Database;
 import com.example.restourantapp.Interface.ItemClickListener;
 import com.example.restourantapp.Model.Food;
 import com.example.restourantapp.view.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -26,6 +28,7 @@ public class FoodList extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference foodList;
     private String restaurantName;
+    private FloatingActionButton btnOpenCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class FoodList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        btnOpenCart = findViewById(R.id.btnOpenCart);
         //get Intent here
         if (getIntent() != null) {
             restaurantName = getIntent().getStringExtra("RestaurantName");
@@ -50,6 +54,15 @@ public class FoodList extends AppCompatActivity {
             }
 
         }
+
+        btnOpenCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cartIntent = new Intent(FoodList.this, Cart.class);
+                startActivity(cartIntent);
+
+            }
+        });
 
 
     }
