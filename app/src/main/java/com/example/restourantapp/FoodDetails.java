@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.restourantapp.Databases.Database;
 import com.example.restourantapp.Model.Food;
+import com.example.restourantapp.Model.Order;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +34,7 @@ public class FoodDetails extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference foods;
+    private Food currentFood;
 
 
     @Override
@@ -51,6 +55,19 @@ public class FoodDetails extends AppCompatActivity {
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsingAppbar);
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Database(getBaseContext()).addToCart(new Order(
+                        foodNameID,
+                        numberButton.getNumber(),
+                        currentFood.getPrice()
+
+
+                ));
+                Toast.makeText(FoodDetails.this, "Added to cart", Toast.LENGTH_LONG).show();
+            }
+        });
 
         //Get food name from Intent
         if (getIntent() != null) {
@@ -74,15 +91,14 @@ public class FoodDetails extends AppCompatActivity {
         foods.child(restaurantID).child("Food").child(foodNameID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Food food = dataSnapshot.getValue(Food.class);
-                collapsingToolbarLayout.setTitle(food.getName());
-                Picasso.with(getBaseContext()).load(food.getImage()).into(food_Image);
-                foodName.setText(food.getName());
+                currentFood = dataSnapshot.getValue(Food.class);
+                collapsingToolbarLayout.setTitle(currentFood.getName());
+                Picasso.with(getBaseContext()).load(currentFood.getImage()).into(food_Image);
+                foodName.setText(currentFood.getName());
 
-                foodPrice.setText(food.getPrice());
+                foodPrice.setText(currentFood.getPrice());
 
-                foodDescription.setText(food.getDescription());
-
+                foodDescription.setText(currentFood.getDescription());
 
             }
 

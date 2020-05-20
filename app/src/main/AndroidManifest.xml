@@ -11,13 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RestaurantsList"></activity>
+        <activity android:name=".Cart"></activity>
+        <activity android:name=".RestaurantReserveList" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBnFQiwyy26b4_7hdlmhdrA5YwOUtQm3Oc" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/FullScreen" />
+        <activity android:name=".RestaurantDetails" />
         <activity android:name=".UserProfile" />
         <activity android:name=".FoodList" />
         <activity android:name=".FoodDetails" />
         <activity android:name=".SignUpActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".RestaurantsList"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
