@@ -1,14 +1,27 @@
 package com.example.restourantapp.Model;
 
+import java.util.List;
+
 public class Food {
 
     private String Name, description, price, image;
+    private List<Addon> Addon;
 
-    public Food(String name, String description, String price, String image) {
+    public Food(String name, String description, String price, String image, List<Addon> Addon) {
         this.Name = name;
         this.description = description;
         this.price = price;
         this.image = image;
+        this.Addon = Addon;
+
+    }
+
+    public List<com.example.restourantapp.Model.Addon> getAddon() {
+        return Addon;
+    }
+
+    public void setAddon(List<com.example.restourantapp.Model.Addon> addon) {
+        Addon = addon;
     }
 
     public Food() {
@@ -46,3 +59,5 @@ public class Food {
         this.image = image;
     }
 }
+
+

@@ -1,16 +1,17 @@
 package com.example.restourantapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restourantapp.Model.User;
 import com.example.restourantapp.view.CountryAdapter;
@@ -55,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Sign Up");
         initList();
         initializeFields();
         mAuth = FirebaseAuth.getInstance();
@@ -89,6 +91,19 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                return true;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void createNewAccount() {
         String email = userEmail.getText().toString();

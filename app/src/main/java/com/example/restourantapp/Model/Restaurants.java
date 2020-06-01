@@ -2,19 +2,37 @@ package com.example.restourantapp.Model;
 
 public class Restaurants {
 
-    private String Name, address, image, description, phone, dressCode, parking;
+    private String Name, address, image, description, phone, dressCode, parking, paymentOptions, working_time;
 
     public Restaurants() {
     }
 
-    public Restaurants(String name, String address, String image, String description, String phone, String dressCode, String parking) {
-        Name = name;
+    public Restaurants(String name, String address, String image, String description, String phone, String dressCode, String parking, String paymentOptions, String working_time) {
+        this.Name = name;
         this.address = address;
         this.image = image;
         this.description = description;
         this.phone = phone;
         this.dressCode = dressCode;
         this.parking = parking;
+        this.paymentOptions = paymentOptions;
+        this.working_time = working_time;
+    }
+
+    public String getWorking_time() {
+        return working_time;
+    }
+
+    public void setWorking_time(String working_time) {
+        this.working_time = working_time;
+    }
+
+    public String getPaymentOptions() {
+        return paymentOptions;
+    }
+
+    public void setPaymentOptions(String paymentOptions) {
+        this.paymentOptions = paymentOptions;
     }
 
     public String getName() {

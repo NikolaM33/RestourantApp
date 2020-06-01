@@ -8,17 +8,37 @@ public class Request {
     private String total;
     private List<Order> foods;
     private String userID;
+    private String status;
+    private String orderID;
 
 
     public Request() {
     }
 
-    public Request(String address, String total, List<Order> foods, String userID, String phone) {
+    public Request(String address, String total, List<Order> foods, String userID, String phone, String orderID) {
         this.phone = phone;
         this.address = address;
         this.total = total;
         this.foods = foods;
         this.userID = userID;
+        this.orderID = orderID;
+        this.status = "0"; //Default 0, 0:Placed, 1:Shipping, 2:Shipped
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPhone() {
