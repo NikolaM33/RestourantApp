@@ -102,6 +102,7 @@ public class FoodDetails extends AppCompatActivity implements RatingDialogListen
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new Database(getBaseContext()).addToCart(new Order(
                         foodNameID,
                         numberButton.getNumber(),

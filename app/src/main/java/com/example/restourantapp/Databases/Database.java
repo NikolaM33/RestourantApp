@@ -14,6 +14,7 @@ import java.util.List;
 public class Database extends SQLiteAssetHelper {
     private static final String DB_NAME = "DatabaseRestourant.db";
     private static final int DB_VER = 1;
+    public int getCountCart;
 
     public Database(Context context) {
         super(context, DB_NAME, null, DB_VER);
@@ -55,4 +56,25 @@ public class Database extends SQLiteAssetHelper {
         db.execSQL(query);
 
     }
+
+public void  removeFromCart(String productName ){
+
+    SQLiteDatabase db = getReadableDatabase();
+    String query = String.format("DELETE FROM OrderDetail WHERE ProductName='%s' " ,productName);
+    db.execSQL(query);
 }
+    public int getCountCart(){
+        int count=0;
+        SQLiteDatabase db = getReadableDatabase();
+        String query= String.format("SELECT COUNT (*) FROM OrderDetail");
+        Cursor cursor=db.rawQuery(query,null);
+        if (cursor.moveToFirst()) {
+            do {
+                count = cursor.getInt(0);
+            } while (cursor.moveToNext());
+        }
+        return count;
+            }
+        }
+
+
