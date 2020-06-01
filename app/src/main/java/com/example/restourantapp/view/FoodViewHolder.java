@@ -14,12 +14,14 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public TextView foodName;
     public ImageView foodImage;
 
+
     private ItemClickListener itemClickListener;
 
     public FoodViewHolder(View itemView) {
         super(itemView);
         foodName = itemView.findViewById(R.id.food_name);
         foodImage = itemView.findViewById(R.id.food_image);
+
         itemView.setOnClickListener(this);
 
     }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.andremion.counterfab.CounterFab;
 import com.example.restourantapp.Databases.Database;
 import com.example.restourantapp.Interface.ItemClickListener;
 import com.example.restourantapp.Model.Food;
@@ -28,7 +29,9 @@ public class FoodList extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference foodList;
     private String restaurantName;
-    private FloatingActionButton btnOpenCart;
+    private CounterFab btnOpenCart;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,11 @@ public class FoodList extends AppCompatActivity {
         foodList = database.getReference("Restourant");
 
         recyclerView = findViewById(R.id.recycler_food);
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        btnOpenCart = findViewById(R.id.btnOpenCart);
+        btnOpenCart =  findViewById(R.id.btnOpenCart);
         //get Intent here
         if (getIntent() != null) {
             restaurantName = getIntent().getStringExtra("RestaurantName");
@@ -53,16 +57,24 @@ public class FoodList extends AppCompatActivity {
                 loadListFood(restaurantName);
             }
 
+
         }
 
         btnOpenCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent cartIntent = new Intent(FoodList.this, Cart.class);
+
                 startActivity(cartIntent);
 
             }
+
         });
+        btnOpenCart.setCount(new Database(this).getCountCart);
+
+
+
+
 
 
     }
@@ -85,12 +97,27 @@ public class FoodList extends AppCompatActivity {
                         Log.i(TAG, "onClick: " + local.getName());
                         startActivity(foodDetails);
 
+
+
+
+
                     }
                 });
+
+
+
 
             }
         };
         recyclerView.setAdapter(adapter);
 
     }
+    protected void onResume() {
+
+        super.onResume();
+        btnOpenCart.setCount(new Database(this).getCountCart);
+
+    }
+
+
 }

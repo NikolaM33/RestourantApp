@@ -3,6 +3,7 @@
     package="com.example.restourantapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,12 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cart"></activity>
+        <activity android:name=".RestaurantsList"></activity>
+        <activity android:name=".homeescreen2" />
+        <activity android:name=".Cart" />
         <activity android:name=".RestaurantReserveList" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBnFQiwyy26b4_7hdlmhdrA5YwOUtQm3Oc" />
+            android:value="AIzaSyBzpLbsXWSt1uql2rcwYAePC7LInNa67Bk" />
 
         <activity
             android:name=".LoginActivity"
@@ -27,7 +30,7 @@
         <activity android:name=".FoodDetails" />
         <activity android:name=".SignUpActivity" />
         <activity
-            android:name=".RestaurantsList"
+            android:name=".splashscreen"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

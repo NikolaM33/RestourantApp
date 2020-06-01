@@ -19,7 +19,7 @@
             android:layout_gravity="center"
 
             android:fontFamily="cursive"
-            android:text="Login"
+            android:text="Welcome to where to eat"
             android:textColor="@android:color/white"
             android:textSize="45dp"
             android:textStyle="bold" />

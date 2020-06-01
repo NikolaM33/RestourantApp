@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+
+        >
+
+
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="92dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:orientation="vertical">
+            
+            
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtComents"
+
+                android:layout_width="match_parent"
+                android:layout_height="112dp"
+                android:layout_gravity="center"
+                android:hint="Comment"
+                android:inputType="textMultiLine"
+                android:text=""
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="34sp" />
+<RadioButton
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Send to this address"
+    android:id="@+id/send_address"
+
+
+    />
+
+
+<ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginTop="10dp"
+    android:visibility="gone">
+
+</ProgressBar>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

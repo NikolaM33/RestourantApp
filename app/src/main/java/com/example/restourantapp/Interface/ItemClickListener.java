@@ -6,3 +6,5 @@ public interface ItemClickListener {
 
     public void onClick(View view, int position, boolean isLongClick);
 }
+
+

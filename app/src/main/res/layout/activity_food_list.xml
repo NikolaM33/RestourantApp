@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.andremion.counterfab.CounterFab
         android:id="@+id/btnOpenCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

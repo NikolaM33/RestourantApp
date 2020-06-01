@@ -9,16 +9,22 @@ public class Request {
     private List<Order> foods;
     private String userID;
 
+    private String comment;
+
+
 
     public Request() {
     }
 
-    public Request(String address, String total, List<Order> foods, String userID, String phone) {
+    public Request(String address, String total, List<Order> foods, String userID, String phone, String comment) {
         this.phone = phone;
         this.address = address;
         this.total = total;
         this.foods = foods;
         this.userID = userID;
+        this.comment = comment;
+
+
     }
 
     public String getPhone() {
@@ -60,4 +66,13 @@ public class Request {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 }
