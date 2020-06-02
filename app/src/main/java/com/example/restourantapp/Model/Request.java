@@ -8,23 +8,31 @@ public class Request {
     private String total;
     private List<Order> foods;
     private String userID;
-
+    private String orderID;
     private String comment;
-
 
 
     public Request() {
     }
 
-    public Request(String address, String total, List<Order> foods, String userID, String phone, String comment) {
+    public Request(String address, String total, List<Order> foods, String userID, String phone, String comment, String orderID) {
         this.phone = phone;
         this.address = address;
         this.total = total;
         this.foods = foods;
         this.userID = userID;
         this.comment = comment;
+        this.orderID = orderID;
 
 
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
     }
 
     public String getPhone() {

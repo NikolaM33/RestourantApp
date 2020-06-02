@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/view_bacground"
+        android:layout_margin="16dp"
         android:background="@android:color/holo_red_dark">
         
         

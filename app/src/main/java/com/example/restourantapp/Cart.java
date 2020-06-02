@@ -1,5 +1,20 @@
 package com.example.restourantapp;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Location;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -8,24 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.Manifest;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.location.Location;
-import android.nfc.Tag;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.restourantapp.Databases.Database;
 import com.example.restourantapp.Interface.RecyclearItemTouchHelperListener;
@@ -42,17 +39,13 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,7 +55,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Connection;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,40 +62,32 @@ import java.util.List;
 import java.util.Locale;
 
 public class Cart extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, RecyclearItemTouchHelperListener {
+    private static final int UPDATE_INTERVAL = 5000;
+    private static final int FATEST_INTERWAL = 3000;
+    private static final int DISPLACEMENT = 10;
+    private static final int LOCATION_REQUEST_CODE = 9999;
+    private static final int PLAY_SERVICES_REQUEST = 9997;
+    RelativeLayout rootLayout;
+    String APIKEY = "AIzaSyBzpLbsXWSt1uql2rcwYAePC7LInNa67Bk";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-
     private FirebaseDatabase database;
     private DatabaseReference requests;
-
     private TextView txtTotalPrice;
     private Button btnPlaceOrder;
     private List<Order> cart = new ArrayList<>();
     private CartAdapter adapter;
     private FirebaseAuth mAuth;
     private User user;
-
-
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClientl;
     private Location mLastLocation;
-    RelativeLayout rootLayout;
-    private static  final  int UPDATE_INTERVAL=5000;
-    private static final int FATEST_INTERWAL=3000;
-    private  static  final  int DISPLACEMENT= 10;
-    private  static  final  int LOCATION_REQUEST_CODE=9999;
-    String APIKEY="AIzaSyBzpLbsXWSt1uql2rcwYAePC7LInNa67Bk";
-private  static  final  int PLAY_SERVICES_REQUEST=9997;
-private String shipingAddress;
+    private String shipingAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
-
-
-
 
 
         //Firebase
@@ -112,26 +96,21 @@ private String shipingAddress;
         requests = database.getReference("Requests");
 
 //Swipe to delete
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
-         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 
+            ActivityCompat.requestPermissions(this, new String[]
+                    {
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    }, LOCATION_REQUEST_CODE);
 
-
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED &&
-            (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED ))
-        {
-
-            ActivityCompat.requestPermissions(this,new String[]
-                            {
-                                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                                    Manifest.permission.ACCESS_FINE_LOCATION
-                            },LOCATION_REQUEST_CODE);
-
-        }
-        else {
-            if (checkPlayServices()){
+        } else {
+            if (checkPlayServices()) {
                 buildGoogleApiClient();
                 createLocationRequest();
             }
@@ -139,10 +118,7 @@ private String shipingAddress;
         }
 
 
-
-
-
-rootLayout=(RelativeLayout)findViewById(R.id.rootLayout);
+        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         recyclerView = findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -154,8 +130,8 @@ rootLayout=(RelativeLayout)findViewById(R.id.rootLayout);
 
 
         //Swipe to delate
-ItemTouchHelper.SimpleCallback itemTouchHelper=new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
-new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        ItemTouchHelper.SimpleCallback itemTouchHelper = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,13 +149,10 @@ new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         });
 
 
-
-
-
     }
 
     private void createLocationRequest() {
-        mLocationRequest=new LocationRequest();
+        mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setFastestInterval(FATEST_INTERWAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -198,15 +171,14 @@ new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 
     private boolean checkPlayServices() {
-        int resultCode= GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS)
-        {
-            if(GooglePlayServicesUtil.isUserRecoverableError(resultCode))
-                GooglePlayServicesUtil.getErrorDialog(resultCode,this,PLAY_SERVICES_REQUEST).show();
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode))
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_REQUEST).show();
 
             else {
-                Toast.makeText(this,"This device is not supported",Toast.LENGTH_SHORT).show();
-finish();
+                Toast.makeText(this, "This device is not supported", Toast.LENGTH_SHORT).show();
+                finish();
             }
             return false;
 
@@ -220,47 +192,37 @@ finish();
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
         alertDialog.setTitle("One more step!");
         alertDialog.setMessage("Enter your address: ");
-        LayoutInflater inflater=this.getLayoutInflater();
-        View  order_address_comment=inflater.inflate(R.layout.order_adress_comment,null);
-         AutocompleteSupportFragment edtAddress=(AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View order_address_comment = inflater.inflate(R.layout.order_adress_comment, null);
+        AutocompleteSupportFragment edtAddress = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         edtAddress.getView().findViewById(R.id.places_autocomplete_search_button).setVisibility(View.GONE);
-        ((EditText)edtAddress.getView().findViewById(R.id.places_autocomplete_search_input)).setHint("Enter your address");
-        ((EditText)edtAddress.getView().findViewById(R.id.places_autocomplete_search_input)).setTextSize(14);
-        Places.initialize(getApplicationContext(),APIKEY);
-PlacesClient placesClient= Places.createClient(this);
-edtAddress.setTypeFilter(TypeFilter.ADDRESS);
-edtAddress.setCountries("RS");
+        ((EditText) edtAddress.getView().findViewById(R.id.places_autocomplete_search_input)).setHint("Enter your address");
+        ((EditText) edtAddress.getView().findViewById(R.id.places_autocomplete_search_input)).setTextSize(14);
+        Places.initialize(getApplicationContext(), APIKEY);
+        PlacesClient placesClient = Places.createClient(this);
+        edtAddress.setTypeFilter(TypeFilter.ADDRESS);
+        edtAddress.setCountries("RS");
 
-       edtAddress.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.NAME));
-       edtAddress.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-           @Override
-           public void onPlaceSelected(@NonNull Place place) {
-               shipingAddress=place.getAddress();
+        edtAddress.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        edtAddress.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                shipingAddress = place.getAddress();
 
-           }
-
-
+            }
 
 
+            @Override
+            public void onError(@NonNull Status status) {
 
-           @Override
-           public void onError(@NonNull Status status) {
-
-           }
-       });
-
+            }
+        });
 
 
+        final TextInputEditText edtComment = (TextInputEditText) order_address_comment.findViewById(R.id.edtComents);
 
 
-
-
-
-        final TextInputEditText edtComment=(TextInputEditText)order_address_comment.findViewById(R.id.edtComents);
-
-
-
-alertDialog.setView(order_address_comment);
+        alertDialog.setView(order_address_comment);
 
 
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
@@ -268,18 +230,16 @@ alertDialog.setView(order_address_comment);
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-
+                String orderId = String.valueOf(System.currentTimeMillis());
                 //create new Request
                 Request request = new Request(
                         shipingAddress,
 
                         txtTotalPrice.getText().toString(), cart, mAuth.getCurrentUser().getUid(), user.getPhoneNumber(),
-                        edtComment.getText().toString()
-
-                        );
+                        edtComment.getText().toString(), orderId);
 
                 //Submit to Firebase
-                requests.child(String.valueOf(System.currentTimeMillis())).setValue(request);
+                requests.child(orderId).setValue(request);
                 new Database(getBaseContext()).cleanCart();
                 Toast.makeText(Cart.this, "Thank you, order Place", Toast.LENGTH_LONG).show();
 
@@ -299,14 +259,10 @@ alertDialog.setView(order_address_comment);
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode)
-        {
-            case  LOCATION_REQUEST_CODE:
-            {
-                if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
-                {
-                    if (checkPlayServices())
-                    {
+        switch (requestCode) {
+            case LOCATION_REQUEST_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (checkPlayServices()) {
                         buildGoogleApiClient();
                         createLocationRequest();
                     }
@@ -360,7 +316,8 @@ alertDialog.setView(order_address_comment);
     }
 
     @Override
-    public void onConnectionSuspended(int i) {mGoogleApiClientl.connect();
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClientl.connect();
 
     }
 
@@ -387,6 +344,7 @@ alertDialog.setView(order_address_comment);
             final int deleIndex = viewHolder.getAdapterPosition();
 
             adapter.removeItem(deleIndex);
+            new Database(getBaseContext()).removeFromCart(deleteItem.getProductName());
             int total = 0;
             for (Order order : cart) {
                 total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
@@ -419,4 +377,5 @@ alertDialog.setView(order_address_comment);
 
             }
         }
-    }}
+    }
+}
