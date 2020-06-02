@@ -14,15 +14,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="#fece2f"
+            android:background="@color/color2"
             android:padding="20dp">
 
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:contentDescription="Profile image"
                 android:layout_centerVertical="true"
-                android:src="@drawable/flag_serbia" />
+                android:src="@drawable/hamburger_image" />
 
             <TextView
                 android:id="@+id/user_name"
@@ -44,7 +45,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/profile_image"
                 android:includeFontPadding="false"
-                android:text="milenkovicnikola33@yahoo.com"
                 android:textSize="14sp" />
 
         </RelativeLayout>
@@ -56,11 +56,12 @@
             android:padding="20dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/orderCard"
                 android:layout_width="0dp"
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#fece2f"
+                app:cardBackgroundColor="@color/color2"
                 app:cardElevation="10dp">
 
                 <RelativeLayout
@@ -92,7 +93,7 @@
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#fece2f"
+                app:cardBackgroundColor="@color/color2"
                 app:cardElevation="10dp">
 
                 <RelativeLayout
@@ -133,7 +134,7 @@
                 android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:focusable="false"
-                android:hint="Full NAme"
+                android:hint="Full Name"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -143,8 +144,7 @@
                     android:clickable="true"
                     android:drawableLeft="@drawable/ic_person_outline_black_24dp"
                     android:drawablePadding="10dp"
-                    android:focusable="false"
-                    android:text="Nikola Milenkovic" />
+                    android:focusable="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -216,6 +216,8 @@
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/color2"
+                android:textColor="@android:color/black"
                 android:text="Log out" />
 
         </LinearLayout>

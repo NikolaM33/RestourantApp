@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:layout_marginBottom="8dp"
+    android:layout_margin="10dp"
     app:cardElevation="4dp">
 
     <RelativeLayout
@@ -25,6 +25,7 @@
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
+
 
 
     </RelativeLayout>

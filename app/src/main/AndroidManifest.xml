@@ -2,29 +2,46 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.restourantapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
-
-
-
-
-
-
-
         android:theme="@style/AppTheme">
-        <activity android:name=".FoodList"></activity>
+        <activity
+            android:name=".RestaurantsList"
+            android:theme="@style/FullScreen"></activity>
+        <activity
+            android:name=".homeescreen2"
+            android:theme="@style/FullScreen" />
+        <activity android:name=".Cart" />
+        <activity
+            android:name=".RestaurantReserveList"
+            android:theme="@style/FullScreen" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBzpLbsXWSt1uql2rcwYAePC7LInNa67Bk" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/FullScreen" />
+        <activity android:name=".OrderStatus" />
+        <activity android:name=".RestaurantDetails" />
+        <activity
+            android:name=".UserProfile"
+            android:theme="@style/FullScreen" />
+        <activity android:name=".FoodList" />
         <activity android:name=".FoodDetails" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".UserProfile">
-
+        <activity
+            android:name=".splashscreen"
+            android:theme="@style/FullScreen">
             <intent-filter>
-
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
