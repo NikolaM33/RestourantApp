@@ -68,7 +68,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     private static final int LOCATION_REQUEST_CODE = 9999;
     private static final int PLAY_SERVICES_REQUEST = 9997;
     RelativeLayout rootLayout;
-    String APIKEY = "AIzaSyBzpLbsXWSt1uql2rcwYAePC7LInNa67Bk";
+    String APIKEY = "";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private FirebaseDatabase database;
