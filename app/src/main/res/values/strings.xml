@@ -9,7 +9,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="About_Restaurant">About the Restaurant</string>
-    <string name="MapsAPIKey">AIzaSyBnFQiwyy26b4_7hdlmhdrA5YwOUtQm3Oc</string>
+    <string name="MapsAPIKey"></string>
     <string name="Add_on">Addon</string>
 
 </resources>
