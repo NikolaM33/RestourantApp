@@ -39,7 +39,7 @@ import java.util.Calendar;
 
 public class ReserveFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "RESERVE FRAGMENT";
-    private final String API_KEY = "AIzaSyBnFQiwyy26b4_7hdlmhdrA5YwOUtQm3Oc";
+    private final String API_KEY = "google key";
     public MapView mapView;
     private TextView restaurantAddress, resPhoneNumber, working_time, paymentOptions, parking, dressCode, description;
     private FirebaseDatabase database;
